@@ -14,7 +14,7 @@ namespace WebAppMvcPeoples.Models.Repos
         // R Read the people list
         public List<Person> Read();// set this to public later after removing interface:s public
 
-        public Person GetById(int id);// set this to public later after removing interface:s public
+        public Person Read(int id);// set this to public later after removing interface:s public
 
 
         // U Update the people list

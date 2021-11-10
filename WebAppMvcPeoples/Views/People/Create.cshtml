@@ -1,0 +1,25 @@
+﻿@model CreatePersonViewModel
+
+<h1>add your self here</h1>
+
+<form asp-action="Create" metod="post">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+
+    <label asp-for="PhoneNumber"></label>
+    <input asp-for="PhoneNumber" />
+
+    <label asp-for="City"></label>
+    <input asp-for="City" list="cityList" />
+
+    <datalist id="cityList">
+        @foreach (string city in Model.CityList)
+        {
+            <option value="@city">@city</option>
+        }
+
+    </datalist>
+
+    <button>Submit</button>
+
+</form>
