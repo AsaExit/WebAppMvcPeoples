@@ -33,7 +33,7 @@ namespace WebAppMvcPeoples.Models.Services
         public Person FindById(int id)
         {
             //return _peopleRepo.Read(id);
-            Person foundPerson = _peopleRepo.GetById(id);
+            Person foundPerson = _peopleRepo.Read(id);
 
             return foundPerson;
         }
@@ -44,7 +44,7 @@ namespace WebAppMvcPeoples.Models.Services
 
         public bool Remove(int id)
         {
-            Person personToDelete = _peopleRepo.GetById(id);
+            Person personToDelete = _peopleRepo.Read(id);
             bool success = _peopleRepo.Delete(personToDelete);
 
             return success;

@@ -1,7 +1,27 @@
-﻿
-@{
-    ViewData["Title"] = "People";
-}
+﻿@model List<Person>
 
-<h1>People</h1>
+<h1>Welcome to reg</h1>
+<a asp-action="Create">Add person</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phonenumber</th>
+            <th>City</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (Person person in Model)
+        {
+            <tr>
+                <td>@person.Name</td>
+                <td>@person.PhoneNumber</td>
+                <td>@person.City</td>
+
+            </tr>
+        }
+    </tbody>
+</table>
 
