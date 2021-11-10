@@ -8,14 +8,15 @@ namespace WebAppMvcPeoples.Models.Services
 {
     public interface IPeopleService
     {
-        Person Add(CreatePersonViewModel person);
-
+        Person Create(CreatePersonViewModel createPerson);
         List<Person> GetAll();
-
+        List<Person> FindByCity(string city);
         Person FindById(int id);
-        Person Edit(Person person);
-        bool Delete(Person person);
-
+        //Person Edit(Person person);
+        bool Edit(int id, CreatePersonViewModel editPerson);
+        //bool Remove(Person person);
+        bool Remove(int id);
+       
     }// End of interface
 
 }// End of namespace
