@@ -4,29 +4,29 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebAppMvcPeoples.Models.Repos
-{
+{// inherent
     public class InMemoryPeopleRepo : IPeopleRepo
     {
-        static int idCounter = 0;
-        static List<Person> peopleList;
-        //static List<Person> people=new List<Person>();
-        public Person Create(string FirstName, string LastName, string City, string PhoneNumber)
+        private List<Person> people = new List<Person>();
+        private static int idCounter = 0;
+        private static List<Person> peopleList;
+        
+        public Person Create(string name,string phonenumber,string city)
         {
-            Person person = new Person();
-
+            Person person = new Person(name,phonenumber, city);
+            
             person.PersonId = ++idCounter;
-            person.FirstName = FirstName;
-            person.LastName = LastName;
-            person.City = City;
-            person.PhoneNumber = PhoneNumber;
+            person.Name = name;
+            person.PhoneNumber = phonenumber;
+            person.City = city;
             peopleList.Add(person);
             return person;
         }
-        public List<Person> GetAll()
+        public List<Person> Read()
         {
             return peopleList;
         }
-        public Person GetById(int id)
+        public Person ReadById(int id)
         {
             Person person = null;
             foreach (Person aPerson in peopleList)
@@ -39,17 +39,28 @@ namespace WebAppMvcPeoples.Models.Repos
 
             }return person;
         }
-        public Person Update(Person person)
+        public bool Update(Person person)// Put/ Push
         {
-            person.PersonId = ++idCounter;
-            peopleList.Add(person);
-            return person;
+            Person orgPerson = ReadById(person.PersonId);
+            if (orgPerson == null)
+            {
+                return false;
+            }
+            else
+            {
+                
+                orgPerson.Name = person.Name;
+                orgPerson.City = person.City;
+                orgPerson.PhoneNumber = person.PhoneNumber;
+                return true;
+            }
+
         }
         public bool Delete(Person person)
         {
-            peopleList.Remove(person);
-            return true;
+            
+            return peopleList.Remove(person);
         }
-
+        
     }//End of Class name
 }//End of namespace

@@ -8,23 +8,27 @@ namespace WebAppMvcPeoples.Models.ViewModels
 {
     public class CreatePersonViewModel
     {
+
+        [Display(Name = "Name")]
         [Required]
-        public string FirstName { get; set; }
-        [Required]
-        public string LastName { get; set; }
-        [Required]
-        public string City{ get; set; }
+        public string Name { get; set; }
+        [Display(Name = "PhoneNumber")]
         [Required]
         public string PhoneNumber { get; set; }
+        [Display(Name = "City")]
+        [Required]
+        public string City { get; set; }
 
-        public List<string> CityList {
+        public List<string> CityList
+        {
             get
             {
                 return new List<string>
                 {
-                    "Växjö","Karlskrona", "Boden","Kirunna"
+                    "Växjö","Karlskrona","Boden","Kirunna"
                 };
-            } 
+
+            }
         }
     }// End of class name
 }// End of namespace

@@ -1,18 +1,33 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace WebAppMvcPeoples.Models
-{// the blueprint of a Person
+{// the blueprint of a Person or my person dataModel
+
     public class Person
     {
-        public int PersonId { get; set; }
+        //private int personId;
+        //private string name;
+        //private string phonenumber;
+        //private string city;
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        
+        public Person(string name,string phonenumber, string city)
+        {
+            
+            this.Name = name;
+            this.PhoneNumber = phonenumber;
+            this.City = city;
+            
+        }
+
+        public int PersonId { get; set; }
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
         public string City { get; set; }
 
-        public string PhoneNumber { get; set; }
     }//End of Person Class
 }//End of namespace
