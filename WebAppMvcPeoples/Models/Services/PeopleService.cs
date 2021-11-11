@@ -16,7 +16,13 @@ namespace WebAppMvcPeoples.Models.Services
         }
         public Person Add(CreatePersonViewModel createPerson)
         {
-            Person person = _peopleRepo.Add(createPerson.Name, createPerson.PhoneNumber, createPerson.City);
+            Person person = _peopleRepo.Create(createPerson.Name, createPerson.PhoneNumber, createPerson.City);
+            if (string.IsNullOrWhiteSpace(createPerson.Name)
+                || string.IsNullOrWhiteSpace(createPerson.PhoneNumber)
+                || string.IsNullOrWhiteSpace(createPerson.City))
+            {
+                throw new ArgumentException("Name,Phonenuber or City, not be consist of backspace(s)/whitespace(s)");
+            }
 
             return person;
         }
@@ -25,11 +31,23 @@ namespace WebAppMvcPeoples.Models.Services
             return _peopleRepo.Read();
         }
 
-        public List<Person> FindByCity(string city)
+        public List<Person> Search(string search)
         {
-            throw new NotImplementedException();
+            List<Person> searchPerson = _peopleRepo.Read();
+            foreach (Person item in _peopleRepo.Read())
+            {
+                if (item.Name.Contains(search, StringComparison.OrdinalIgnoreCase)
+                   || item.City.Contains(search, StringComparison.OrdinalIgnoreCase))
+                {
+                     searchPerson.Add(item);
+                }
+            }
+            if (searchPerson.Count == 0)
+            {
+                throw new ArgumentException("Could not find what you where looking for");
+            }
+            return searchPerson;
         }
-
         public Person FindById(int id)
         {
             //return _peopleRepo.Read(id);

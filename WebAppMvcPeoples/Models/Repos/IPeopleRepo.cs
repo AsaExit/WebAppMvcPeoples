@@ -9,7 +9,7 @@ namespace WebAppMvcPeoples.Models.Repos
     {
         // C Create
         //Person Create(Person person);
-        public Person Add(string name, string phonenumber, string city); // set this to public later after removing interface:s public
+        public Person Create(string name, string phonenumber, string city); // set this to public later after removing interface:s public
 
         // R Read the people list
         public List<Person> Read();// set this to public later after removing interface:s public
