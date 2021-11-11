@@ -14,13 +14,13 @@ namespace WebAppMvcPeoples.Models.Services
         {
             _peopleRepo = peopleRepo;
         }
-        public Person Create(CreatePersonViewModel createPerson)
+        public Person Add(CreatePersonViewModel createPerson)
         {
-            Person person = _peopleRepo.Create(createPerson.Name, createPerson.PhoneNumber, createPerson.City);
+            Person person = _peopleRepo.Add(createPerson.Name, createPerson.PhoneNumber, createPerson.City);
 
             return person;
         }
-        public List<Person> GetAll()
+        public List<Person> All()
         {
             return _peopleRepo.Read();
         }

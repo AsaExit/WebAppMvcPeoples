@@ -10,7 +10,7 @@ namespace WebAppMvcPeoples.Models.Repos
         private static List<Person> peopleList = new List<Person>();
         private static int idCounter = 0;
 
-        public Person Create(string name,string phonenumber,string city)
+        public Person Add(string name,string phonenumber,string city)
         {
             Person person = new Person(name, phonenumber, city);
 

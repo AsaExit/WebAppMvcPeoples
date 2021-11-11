@@ -8,8 +8,8 @@ namespace WebAppMvcPeoples.Models.Services
 {
     public interface IPeopleService
     {
-        Person Create(CreatePersonViewModel createPerson);
-        List<Person> GetAll();
+        Person Add(CreatePersonViewModel createPerson);
+        List<Person> All();
         List<Person> FindByCity(string city);
         Person FindById(int id);
         //Person Edit(Person person);
