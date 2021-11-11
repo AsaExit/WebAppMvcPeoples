@@ -19,7 +19,7 @@ namespace WebAppMvcPeoples.Controllers
 
         public IActionResult People()
         {
-            return View(_peopleService.GetAll());
+            return View(_peopleService.All());
         }
         [HttpGet]
         public IActionResult Create()
@@ -31,7 +31,7 @@ namespace WebAppMvcPeoples.Controllers
         {
             if (ModelState.IsValid)
             {
-                _peopleService.Create(createPerson);
+                _peopleService.Add(createPerson);
                 return RedirectToAction(nameof(People));
             }
             return View(createPerson);
