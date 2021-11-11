@@ -10,7 +10,7 @@ namespace WebAppMvcPeoples.Models.Services
     {
         Person Add(CreatePersonViewModel createPerson);
         List<Person> All();
-        List<Person> FindByCity(string city);
+        List<Person> Search(string Search);
         Person FindById(int id);
         //Person Edit(Person person);
         bool Edit(int id, CreatePersonViewModel editPerson);

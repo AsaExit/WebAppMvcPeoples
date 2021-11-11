@@ -9,6 +9,7 @@
             <th>Name</th>
             <th>Phonenumber</th>
             <th>City</th>
+            <th></th>
         </tr>
 
     </thead>
@@ -19,6 +20,7 @@
                 <td>@person.Name</td>
                 <td>@person.PhoneNumber</td>
                 <td>@person.City</td>
+                <td>@Html.ActionLink("Details", "Details", "People", new { id = person.PersonId })</td>
 
             </tr>
         }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAppMvcPeoples.Models;
 using WebAppMvcPeoples.Models.Repos;
 using WebAppMvcPeoples.Models.Services;
 using WebAppMvcPeoples.Models.ViewModels;
@@ -31,10 +32,31 @@ namespace WebAppMvcPeoples.Controllers
         {
             if (ModelState.IsValid)
             {
-                _peopleService.Add(createPerson);
+                try
+                {
+                    _peopleService.Add(createPerson);
+                }
+                catch (ArgumentException exception)
+                {
+                    ModelState.AddModelError("Name,Phonenumber & City", exception.Message);
+                    return View(createPerson);
+                }
+             
                 return RedirectToAction(nameof(People));
             }
             return View(createPerson);
+        }
+        public IActionResult Details(int id)
+        {
+            Person person = _peopleService.FindById(id);
+
+            if (person == null)
+            {
+                return RedirectToAction(nameof(People));
+                //return NotFound();//404
+            }
+
+            return View(person);
         }
     }//End of Class name
 }//End of namespace
