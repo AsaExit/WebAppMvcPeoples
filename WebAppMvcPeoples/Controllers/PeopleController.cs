@@ -46,6 +46,7 @@ namespace WebAppMvcPeoples.Controllers
             }
             return View(createPerson);
         }
+        [HttpGet]
         public IActionResult Details(int id)
         {
             Person person = _peopleService.FindById(id);
@@ -56,6 +57,21 @@ namespace WebAppMvcPeoples.Controllers
                 //return NotFound();//404
             }
 
+            return View(person);
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Person person = _peopleService.FindById(id);
+
+            if (person == null)
+            {
+                return RedirectToAction(nameof(People));
+                //return NotFound();//404
+            }
+            
+            _peopleService.Remove(id);         
+                
             return View(person);
         }
     }//End of Class name

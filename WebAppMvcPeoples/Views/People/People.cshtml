@@ -16,13 +16,17 @@
     <tbody>
         @foreach (Person person in Model)
         {
-            <tr>
-                <td>@person.Name</td>
-                <td>@person.PhoneNumber</td>
-                <td>@person.City</td>
-                <td>@Html.ActionLink("Details", "Details", "People", new { id = person.PersonId })</td>
+        <tr>
+            <td>@person.Name</td>
+            <td>@person.PhoneNumber</td>
+            <td>@person.City</td>
+            <td>@Html.ActionLink("Details", "Details", "People", new { id = person.PersonId })</td>
+            <td></td>
+            <td>@Html.ActionLink("Delete", "Delete", "People", new { id = person.PersonId })</td>
 
-            </tr>
+
+
+        </tr>
         }
     </tbody>
 </table>

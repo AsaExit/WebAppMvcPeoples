@@ -13,8 +13,6 @@ namespace WebAppMvcPeoples.Models.ViewModels
 
         public string FilterString { get; set; }
 
-        public string SearchResultEmpty { get; set; }
-
         public PeopleViewModel()
         { PeopleListView = new List<Person>(); }
     }

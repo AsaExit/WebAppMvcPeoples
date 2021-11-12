@@ -34,6 +34,7 @@ namespace WebAppMvcPeoples.Models.Services
         public List<Person> Search(string search)
         {
             List<Person> searchPerson = _peopleRepo.Read();
+            //
             foreach (Person item in _peopleRepo.Read())
             {
                 if (item.Name.Contains(search, StringComparison.OrdinalIgnoreCase)
@@ -42,6 +43,7 @@ namespace WebAppMvcPeoples.Models.Services
                      searchPerson.Add(item);
                 }
             }
+            //searchPerson = searchPerson.Where(p => p.Name.ToUpper().Contains(search.ToUpper()) || p.City.Contains(search.ToUpper())).ToList();
             if (searchPerson.Count == 0)
             {
                 throw new ArgumentException("Could not find what you where looking for");
