@@ -16,18 +16,34 @@
     <tbody>
         @foreach (Person person in Model)
         {
-        <tr>
+           <tr>
             <td>@person.Name</td>
             <td>@person.PhoneNumber</td>
             <td>@person.City</td>
             <td>@Html.ActionLink("Details", "Details", "People", new { id = person.PersonId })</td>
             <td></td>
-            <td>@Html.ActionLink("Delete", "Delete", "People", new { id = person.PersonId })</td>
+            @**
+            <td>
+                <button name="X-HTTP-Method-Override" value="DELETE" formnovalidate
+                        class="cancel" onclick="return confirm('Are you sure?')">
+                    Delete
+                </button>
+            </td>*@
 
+                <td>@using (Html.BeginForm("delete", "People", new { id = person.PersonId })) 
+                {
+                    <input type="submit" value="delete" onclick="confirm('Are you sure to delete this person')"/>
+                 }
+                 </td >
 
-
-        </tr>
+           </tr>
+        
+            
+            
         }
+        
+        
     </tbody>
 </table>
+
 
