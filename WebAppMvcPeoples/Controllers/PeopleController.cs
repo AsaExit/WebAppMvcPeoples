@@ -59,20 +59,17 @@ namespace WebAppMvcPeoples.Controllers
 
             return View(person);
         }
-        [HttpGet]
+        [HttpPost]
         public IActionResult Delete(int id)
         {
             Person person = _peopleService.FindById(id);
-
+            _peopleService.Remove(id);
             if (person == null)
             {
                 return RedirectToAction(nameof(People));
                 //return NotFound();//404
             }
-            
-            _peopleService.Remove(id);         
-                
-            return View(person);
+            return View(); 
         }
     }//End of Class name
 }//End of namespace
