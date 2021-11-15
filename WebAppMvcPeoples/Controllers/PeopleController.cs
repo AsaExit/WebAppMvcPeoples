@@ -59,7 +59,7 @@ namespace WebAppMvcPeoples.Controllers
 
             return View(person);
         }
-        [HttpPost]
+        [HttpDelete]
         public IActionResult Delete(int id)
         {
             Person person = _peopleService.FindById(id);
@@ -69,7 +69,8 @@ namespace WebAppMvcPeoples.Controllers
                 return RedirectToAction(nameof(People));
                 //return NotFound();//404
             }
-            return View(); 
+            return RedirectToAction(nameof(People));
+            //return View(); 
         }
     }//End of Class name
 }//End of namespace
