@@ -69,10 +69,10 @@ namespace WebAppMvcPeoples.Controllers
                 return RedirectToAction(nameof(People));
                 //return NotFound();//404
             }
-            else if (person != null)
+            else
             {
                 _peopleService.Remove(id);
-                return View();
+                
             }
             
             return View(); 
