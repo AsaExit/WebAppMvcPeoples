@@ -3,46 +3,38 @@
 <h1>Welcome to reg</h1>
 <a asp-action="Create">Add person</a>
 
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Phonenumber</th>
-            <th>City</th>
-            <th></th>
-        </tr>
+<div class="row font-weight-bold mt-3">
 
-    </thead>
-    <tbody>
-        @foreach (Person person in Model)
-        {
-        <tr>
+    <div class="col-4">Name</div>
+    <div class="col-4">Phonenumber</div>
+    <div class="col-2">City</div>
+    <div class="col-2"></div>
+
+</div>
+
+@foreach (Person person in Model)
+{
+    @*<tr>
             <td>@person.Name</td>
             <td>@person.PhoneNumber</td>
             <td>@person.City</td>
             <td>@Html.ActionLink("Details", "Details", "People", new { id = person.PersonId })</td>
             <td></td>
-            @*
+
         <td>
             <button name="X-HTTP-Method-Override" value="DELETE" formnovalidate
                     class="cancel" onclick="return confirm('Are you sure?')">
                 Delete
             </button>
-        </td>*@
+        </td>
 
-             <td>
-            @using (Html.BeginForm("delete", "People", new { id = person.PersonId }))
-            {
-                <input type="submit" value="delete" onclick="confirm('Are you sure to delete this person')" />
-            }
-             </td>
 
-        </tr>
-          
-        }
-        
-        
-    </tbody>
-</table>
+        </tr>*@
+
+    <partial name="_PeopleDisplay" model="person" />
+
+}
+
+
 
 

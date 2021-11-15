@@ -1,20 +1,55 @@
-﻿@model Person 
+﻿@model Person
 @{
     ViewData["Title"] = "Person Details";
 }
 
 <h1>Person Details</h1>
+<div class="row font-weight-bold mt-3 d-flex-column align-items-lg-stretch">
 
-<dl>
-    <dt>Namn</dt>
-    <dd>@Model.Name</dd>
+    <div class="col-5 mt-2">Namn</div>
+    <div class="col-5 mt-2">Phonenumber</div>
+    <div class="col-2 mt-2">City</div>
+</div>
+<div class="row">
+    <div class="col-5 mt-2">@Model.Name</div>
+    <div class="col-5 mt-2">@Model.PhoneNumber</div>
+    <div class="col-2 mt-2">@Model.City</div>
+</div>
 
-    <dt>Phonenumber</dt>
-    <dd>@Model.PhoneNumber</dd>
-
-    <dt>City</dt>
-    <dd>@Model.City</dd>
-</dl>
 
 
-<a asp-action="people">back</a>
+<a asp-action="People" class="btn btn-dark">Back to the list of people</a>
+<br/>
+<a class="btn btn-primary mt-5" asp-controller="People" asp-action="Delete" asp-route-id="@Model.PersonId">Delete</a>
+@*<div>
+    @using (Html.BeginForm("delete", "People", new { id = Model.PersonId }))
+    {
+        <input type="submit" value="delete" onclick="confirm('Are you sure to delete this person')" />
+    }
+</div>
+@*<a class="btn btn-primary mt-5" asp-controller="People" asp-action="Delete" asp-route-id="@Model.PersonId">Delete</a>
+    @*<dl>
+                   <dt>Namn</dt>
+                   <dd>@Model.Name</dd>
+
+                   <dt>Phonenumber</dt>
+                   <dd>@Model.PhoneNumber</dd>
+
+                   <dt>City</dt>
+                   <dd>@Model.City</dd>
+            </dl>
+
+                <td>
+                    <button name="X-HTTP-Method-Override" value="DELETE" formnovalidate
+                            class="cancel" onclick="return confirm('Are you sure?')">
+                        Delete
+                    </button>
+                </td>
+        <td>
+            @using (Html.BeginForm("delete", "People", new { id = person.PersonId }))
+            {
+                <input type="submit" value="delete" onclick="confirm('Are you sure to delete this person')" />
+            }
+        </td>
+*@
+
