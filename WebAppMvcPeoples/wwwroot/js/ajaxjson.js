@@ -1,5 +1,5 @@
 ﻿
-function getLastCar(actionUrl) {
+function getLastPeople(actionUrl) {
 
     $.get(actionUrl, function (response) {
         console.log("response:", response);
@@ -8,7 +8,7 @@ function getLastCar(actionUrl) {
 
 }
 
-function getCarList(actionUrl) {
+function getPeopleList(actionUrl) {
 
     $.get(actionUrl, function (response) {
         console.log("response:", response);
@@ -17,7 +17,7 @@ function getCarList(actionUrl) {
 
 }
 
-function getLastCarJSON(actionUrl) {
+function getLastPeopleJSON(actionUrl) {
 
     $.get(actionUrl, function (response) {
         console.log("JSON response:", response);
