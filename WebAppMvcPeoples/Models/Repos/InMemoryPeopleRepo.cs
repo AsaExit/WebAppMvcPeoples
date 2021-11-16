@@ -29,17 +29,16 @@ namespace WebAppMvcPeoples.Models.Repos
 
         public Person Read(int id)
         {
-            Person person = null;
-            foreach (Person aPerson in peopleList)
+           
+            foreach (Person person in peopleList)
             {
-                if (aPerson.PersonId == id)
+                if (person.PersonId == id)
                 {
-                    person = aPerson;
-                    break;
+                    return  person;
+                    
                 }
-
             }
-            return person;
+            return null;
         }
 
         public bool Update(Person person)
