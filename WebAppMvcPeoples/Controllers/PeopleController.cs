@@ -77,5 +77,40 @@ namespace WebAppMvcPeoples.Controllers
             
             return View(); 
         }
+        [HttpPost]
+        public IActionResult People(string search)
+        {
+            if (search != null)
+            {
+                return View(_peopleService.Search(search));
+            }
+            return RedirectToAction(nameof(People));
+        }
+
+        //**********************************// AJAX //*******************************************//
+        public IActionResult PartialViewPeople()
+        {
+            return PartialView("_PeopleList", _peopleService.All());
+        }
+        [HttpPost]
+        public IActionResult PartialViewDetails(int id)
+        {
+            Person person = _peopleService.FindById(id);
+            if (person != null)
+            {
+                return PartialView("_PersonDetails", person);
+            }
+            return NotFound();
+        }
+        public IActionResult AjaxDelete(int id)
+        {
+            Person person = _peopleService.FindById(id);
+            if (_peopleService.Remove(id))
+            {
+                return PartialView("_PeopleList", _peopleService.All());
+            }
+            return NotFound();
+        }
+
     }//End of Class name
 }//End of namespace
