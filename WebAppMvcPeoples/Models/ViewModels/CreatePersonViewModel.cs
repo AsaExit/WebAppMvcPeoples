@@ -25,7 +25,28 @@ namespace WebAppMvcPeoples.Models.ViewModels
             {
                 return new List<string>
                 {
-                    "Växjö","Karlskrona","Boden","Kirunna"
+                    "Karlskrona",
+                    "Kirunna",
+                    "Boden",
+                    "Borås",
+                    "Gävle",
+                    "Umeå",
+                    "Lund",
+                    "JönKöping",
+                    "Norrköping",
+                    "Helsihgborg",
+                    "Linköping",
+                    "Örebro",
+                    "Västerås",
+                    "Växjö",
+                    "Upplands",
+                    "Väsby",
+                    "Sollentuna",
+                    "Södertälje",
+                    "Uppsala",
+                    "Malmö",
+                    "Göteborg",
+                    "Stockholm"
                 };
 
             }
