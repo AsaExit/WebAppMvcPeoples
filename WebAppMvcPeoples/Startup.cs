@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,11 +9,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAppMvcPeoples.Data;
+using WebAppMvcPeoples.Models.Repos;
+using WebAppMvcPeoples.Models.Services;
 
 namespace WebAppMvcPeoples
 {
     public class Startup
-    {
+    {// Step 4
         public Startup(IConfiguration configuration)
         {// jason appsetting
             Configuration = configuration;
@@ -22,7 +26,12 @@ namespace WebAppMvcPeoples
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {// Step 5
+            services.AddDbContext<PeopleDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            // Step 6
+            services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();
+            services.AddScoped<IPeopleService, PeopleService>();// IoC & DI
             //services.AddControllersWithViews(); //Will be used later maybe
             services.AddMvc().AddRazorRuntimeCompilation();
         }

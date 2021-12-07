@@ -14,13 +14,16 @@ namespace WebAppMvcPeoples.Models
         //private string phonenumber;
         //private string city;
 
-        
+        public Person()
+        {
+
+        }
         public Person(string name,string phonenumber, string city)
         {
             
-            this.Name = name;
-            this.PhoneNumber = phonenumber;
-            this.City = city;
+            Name = name;
+            PhoneNumber = phonenumber;
+            City = city;
             
         }
 

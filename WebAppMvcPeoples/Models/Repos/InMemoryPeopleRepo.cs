@@ -51,8 +51,9 @@ namespace WebAppMvcPeoples.Models.Repos
             else
             {
                 orgPerson.Name = person.Name;
-                orgPerson.City = person.City;
                 orgPerson.PhoneNumber = person.PhoneNumber;
+                orgPerson.City = person.City;
+                
                 return true;
             }
         }
@@ -61,5 +62,9 @@ namespace WebAppMvcPeoples.Models.Repos
             return peopleList.Remove(person);
         }
 
+        public Person Create(Person person)
+        {
+            throw new NotImplementedException();
+        }
     }//End of Class name
 }//End of namespace

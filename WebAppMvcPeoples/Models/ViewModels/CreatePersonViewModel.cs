@@ -9,12 +9,14 @@ namespace WebAppMvcPeoples.Models.ViewModels
     public class CreatePersonViewModel
     {
 
-        [Display(Name = "Name")]
+        [Display(Name = "First and last name")]
         [Required]
         public string Name { get; set; }
-        [Display(Name = "PhoneNumber")]
+        
+        [Display(Name = "Phone Number")]
         [Required]
         public string PhoneNumber { get; set; }
+        
         [Display(Name = "City")]
         [Required]
         public string City { get; set; }
