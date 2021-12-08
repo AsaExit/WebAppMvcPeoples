@@ -12,13 +12,13 @@ namespace WebAppMvcPeoples.Models
         //private int personId;
         //private string name;
         //private string phonenumber;
-        //private string city;
+        //private City city;
 
         public Person()
         {
 
         }
-        public Person(string name,string phonenumber, string city)
+        public Person(string name,string phonenumber, string city)// Here to put in City class name
         {
             
             Name = name;
@@ -26,7 +26,7 @@ namespace WebAppMvcPeoples.Models
             City = city;
             
         }
-
+        
         public int PersonId { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }

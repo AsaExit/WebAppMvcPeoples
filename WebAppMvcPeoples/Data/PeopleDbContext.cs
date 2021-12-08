@@ -13,6 +13,7 @@ namespace WebAppMvcPeoples.Data
         { }
         
            public DbSet<Person> People{ get; set; }
-        
+        //public DbSet<City> Cities { get; set; }
+
     }
 }

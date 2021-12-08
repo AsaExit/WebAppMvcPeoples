@@ -42,14 +42,23 @@ namespace WebAppMvcPeoples.Data
         {
 
             _peopleDbContext.People.Update(person);
-            _peopleDbContext.SaveChanges();
-            return true;
+           int result= _peopleDbContext.SaveChanges();
+            if (result >0)
+            {
+                return true;
+
+            }
+            return false;
         }
         public bool Delete(Person person)
         {
             _peopleDbContext.People.Remove(person);
-            _peopleDbContext.SaveChanges();
-            return true;
+           int result= _peopleDbContext.SaveChanges();
+            if (result > 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
