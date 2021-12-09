@@ -30,8 +30,16 @@ namespace WebAppMvcPeoples
             services.AddDbContext<PeopleDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             // Step 6
-            services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();
+            //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();
+            services.AddScoped<IPeopleRepo, DatabasPeopleRepo>();// IoC & DI
             services.AddScoped<IPeopleService, PeopleService>();// IoC & DI
+
+            //services.AddScoped<ICityRepo, DatabasPeopleRepo>();// IoC & DI
+            //services.AddScoped<ICityService, CityService>();// IoC & DI
+
+            //services.AddScoped<ICountryRepo, DatabasPeopleRepo>();// IoC & DI
+            //services.AddScoped<ICountryService, CountryService>();// IoC & DI
+
             //services.AddControllersWithViews(); //Will be used later maybe
             services.AddMvc().AddRazorRuntimeCompilation();
         }

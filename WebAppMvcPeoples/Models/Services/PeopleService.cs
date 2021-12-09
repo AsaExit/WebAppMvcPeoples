@@ -59,7 +59,13 @@ namespace WebAppMvcPeoples.Models.Services
         }
         public bool Edit(int id, CreatePersonViewModel editPerson)
         {
-            throw new NotImplementedException();
+            Person orginalPerson = FindById(id);
+            if (orginalPerson==null)
+            {
+                return false;
+            }
+            orginalPerson.Name = editPerson.Name;
+            return _peopleRepo.Update(orginalPerson);
         }
 
         public bool Remove(int id)

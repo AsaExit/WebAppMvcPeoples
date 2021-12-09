@@ -13,9 +13,9 @@ namespace WebAppMvcPeoples.Controllers
     public class PeopleController : Controller
     {
         IPeopleService _peopleService;
-        public PeopleController()
+        public PeopleController(IPeopleService peopleService)
         {
-            _peopleService = new PeopleService(new InMemoryPeopleRepo());
+            _peopleService = peopleService;
         }
 
         public IActionResult People()
