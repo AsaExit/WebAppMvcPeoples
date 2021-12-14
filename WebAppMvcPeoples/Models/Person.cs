@@ -9,7 +9,7 @@ namespace WebAppMvcPeoples.Models
 
     public class Person
     {
-        //private int personId;
+        
         //private string name;
         //private string phonenumber;
         //private City city;
@@ -18,19 +18,19 @@ namespace WebAppMvcPeoples.Models
         {
 
         }
-        public Person(string name,string phonenumber, string city)// Here to put in City class name
+        public Person(string name,string phonenumber, City city)// Here to put in City class name
         {
             
             Name = name;
             PhoneNumber = phonenumber;
-            City = city;
+            City = City;
             
         }
-        
+        [Key]
         public int PersonId { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
-        public string City { get; set; }
+        public  City City { get; set; }
 
     }//End of Person Class
 }//End of namespace

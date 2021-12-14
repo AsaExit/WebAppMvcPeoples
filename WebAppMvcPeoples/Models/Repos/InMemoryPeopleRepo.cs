@@ -10,7 +10,7 @@ namespace WebAppMvcPeoples.Models.Repos
         private static List<Person> peopleList = new List<Person>();
         private static int idCounter = 0;
 
-        public Person Create(string name,string phonenumber,string city)
+        public Person Create(string name,string phonenumber,City city)
         {
             Person person = new Person(name, phonenumber, city);
 
@@ -62,9 +62,6 @@ namespace WebAppMvcPeoples.Models.Repos
             return peopleList.Remove(person);
         }
 
-        public Person Create(Person person)
-        {
-            throw new NotImplementedException();
-        }
+
     }//End of Class name
 }//End of namespace

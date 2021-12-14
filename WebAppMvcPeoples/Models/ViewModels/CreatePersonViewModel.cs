@@ -19,39 +19,8 @@ namespace WebAppMvcPeoples.Models.ViewModels
         
         [Display(Name = "City")]
         [Required]
-        public string City { get; set; }
+        public  City City{ get; set; }
 
-        public List<string> CityList
-        {
-            get
-            {
-                return new List<string>
-                {
-                    "Karlskrona",
-                    "Kirunna",
-                    "Boden",
-                    "Borås",
-                    "Gävle",
-                    "Umeå",
-                    "Lund",
-                    "JönKöping",
-                    "Norrköping",
-                    "Helsihgborg",
-                    "Linköping",
-                    "Örebro",
-                    "Västerås",
-                    "Växjö",
-                    "Upplands",
-                    "Väsby",
-                    "Sollentuna",
-                    "Södertälje",
-                    "Uppsala",
-                    "Malmö",
-                    "Göteborg",
-                    "Stockholm"
-                };
-
-            }
-        }
+        public List<City> CityList { get; set; }
     }// End of class name
 }// End of namespace

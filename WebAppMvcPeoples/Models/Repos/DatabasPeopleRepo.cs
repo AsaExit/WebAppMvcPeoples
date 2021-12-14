@@ -14,7 +14,7 @@ namespace WebAppMvcPeoples.Data
         {
             _peopleDbContext = peopleDbContext;
         }
-        public Person Create(string name, string phonenumber, string city)
+        public Person Create(string name, string phonenumber, City city)
         {
             Person newPerson = new Person(name, phonenumber, city);
 

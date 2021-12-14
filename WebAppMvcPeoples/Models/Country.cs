@@ -8,13 +8,12 @@ namespace WebAppMvcPeoples.Models
 {
     public class Country
     {
-        private string _countryname;// _ "needel" String countryname
-
+        
         public List<City> Cities { get; set; }//Navigation Property
 
         public Country(string countryname)
         {
-            ConutryName = countryname;
+            CountryName = countryname;
         }
         public Country()// Empty constructor
         {
@@ -23,10 +22,9 @@ namespace WebAppMvcPeoples.Models
         [Key]
         public int CountryId { get; }
         [StringLength(80, MinimumLength = 1)]
-        public string ConutryName
+        public string CountryName
         {
-            get { return _countryname; }
-            set { _countryname = value; }
+            get; set;
         }
     }
 }

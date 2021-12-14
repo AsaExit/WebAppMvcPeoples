@@ -11,8 +11,9 @@ namespace WebAppMvcPeoples.Controllers
 {
     public class AjaxPeopleController : Controller
     {
-        private readonly PeopleService _peopleService;
-
+        private readonly IPeopleService _peopleService;
+        //private readonly ICityService _cityService;
+        //private readonly ICountryService _countryService;
         public AjaxPeopleController()
         {
             _peopleService = new PeopleService(new InMemoryPeopleRepo());
