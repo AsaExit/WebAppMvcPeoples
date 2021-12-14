@@ -14,17 +14,10 @@ namespace WebAppMvcPeoples.Models.Services
         {
             _peopleRepo = peopleRepo;
         }
-        public Person Add(CreatePersonViewModel createPerson)
+        public Person Add(CreatePersonViewModel person)
         {
-            Person person = _peopleRepo.Create(createPerson.Name, createPerson.PhoneNumber, createPerson.City);
-            if (string.IsNullOrWhiteSpace(createPerson.Name)
-                || string.IsNullOrWhiteSpace(createPerson.PhoneNumber)
-                || string.IsNullOrWhiteSpace(createPerson.City))
-            {
-                throw new ArgumentException("Name,Phonenuber or City, not be consist of backspace(s)/whitespace(s)");
-            }
-
-            return person;
+            Person createPerson = _peopleRepo.Create(person.Name, person.PhoneNumber,person.City);
+            return createPerson;
         }
         public List<Person> All()
         {
@@ -37,8 +30,7 @@ namespace WebAppMvcPeoples.Models.Services
             //
             foreach (Person item in _peopleRepo.Read())
             {
-                if (item.Name.Contains(search, StringComparison.OrdinalIgnoreCase)
-                   || item.City.Contains(search, StringComparison.OrdinalIgnoreCase))
+                if (item.Name.Contains(search, StringComparison.OrdinalIgnoreCase))
                 {
                      searchPerson.Add(item);
                 }

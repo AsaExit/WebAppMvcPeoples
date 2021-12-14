@@ -10,7 +10,7 @@ namespace WebAppMvcPeoples.Models.ViewModels
     //Chained Constructors
     {
         public List<Person> PeopleListView { get; set; }
-
+        public List<City> CityListView { get; set; }
         public string FilterString { get; set; }
 
         public PeopleViewModel()

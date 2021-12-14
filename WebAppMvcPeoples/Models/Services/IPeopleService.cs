@@ -16,6 +16,7 @@ namespace WebAppMvcPeoples.Models.Services
         bool Edit(int id, CreatePersonViewModel editPerson);
         //bool Remove(Person person);
         bool Remove(int id);
+
        
     }// End of interface
 

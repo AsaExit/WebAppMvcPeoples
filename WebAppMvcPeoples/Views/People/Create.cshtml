@@ -48,7 +48,7 @@
             <input class="form-control" asp-for="City" />
             <span asp-validation-for="City"></span>
             <datalist id="cityList">
-                @foreach (string city in Model.CityList)
+                @foreach (City city in Model.CityList)
                 {
                     <option value="@city">@city</option>
                 }
