@@ -15,40 +15,44 @@ namespace WebAppMvcPeoples.Models.Services
         {
             _cityRepo = cityRepo;
         }
-        public City Add(CreateCityViewModel cityViewModel)
+        public City Create(CreateCityViewModel createCity)
         {
-            City createCity = _cityRepo.Create(cityViewModel.CityName);
-            return createCity;
-        }
-
-        public CityViewModel All()
-        {
-            CityViewModel findAllCities = new CityViewModel() { CityListView = _cityRepo.Read() };
-            return findAllCities;
-        }
-
-        public CityViewModel FindBy(CityViewModel search)
-        {
-            search.CityListView.Clear();
-            //
-            foreach (City item in _cityRepo.Read())
+            if (string.IsNullOrWhiteSpace(createCity.CityName))
             {
-                if (item.CityName.Contains(search.FilterString, StringComparison.OrdinalIgnoreCase))
+                return null;
+            }
+
+            return _cityRepo.Create(new City(createCity.CityName));
+        }
+
+
+        public List<City> GetAll()
+        {
+            return _cityRepo.GetAll();
+        }
+
+        public List<City> FindBy(string search)
+        {
+            List<City> searchCity = _cityRepo.GetAll();
+            //
+            foreach (City item in _cityRepo.GetAll())
+            {
+                if (item.CityName.Contains(search, StringComparison.OrdinalIgnoreCase))
                 {
-                    search.CityListView.Add(item);
+                    searchCity.Add(item);
                 }
             }
             //searchPerson = searchPerson.Where(p => p.Name.ToUpper().Contains(search.ToUpper()) || p.City.Contains(search.ToUpper())).ToList();
-            if (search.CityListView.Count == 0)
+            if (searchCity.Count == 0)
             {
                 throw new ArgumentException("Could not find what you where looking for");
             }
-            return search;
+            return searchCity;
         }
 
         public City FindById(int Id)
         {
-            City cityFound = _cityRepo.Read(Id);
+            City cityFound = _cityRepo.FindById(Id);
             return cityFound;
         }
         public bool Edit(int Id, CreateCityViewModel editCity)
@@ -63,7 +67,7 @@ namespace WebAppMvcPeoples.Models.Services
         }
         public bool Remove(int Id)
         {
-            City cityToDelete = _cityRepo.Read(Id);
+            City cityToDelete = _cityRepo.FindById(Id);
             bool succses = _cityRepo.Delete(cityToDelete);
             return succses;
         }

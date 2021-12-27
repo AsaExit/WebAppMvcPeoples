@@ -12,7 +12,8 @@ namespace WebAppMvcPeoples.Models.ViewModels
         [Required(ErrorMessage ="Enter a country, it is Required!")]
         [StringLength(80, MinimumLength =1)]
         [Display(Name = "Country")]
-
         public string CountryName { get; set; }
+        public List<City> CityList { get; set; }
+        public CreateCountryViewModel() => CityList = new List<City>(); 
     }
 }

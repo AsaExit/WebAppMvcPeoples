@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,36 +15,35 @@ namespace WebAppMvcPeoples.Data
         {
             _peopleDbContext = peopleDbContext;
         }
-        public Person Create(string name, string phonenumber, City city)
+        public Person Create(Person person)
         {
-            Person newPerson = new Person(name, phonenumber, city);
-
-            _peopleDbContext.Add(newPerson);
+            _peopleDbContext.People.Add(person);
             _peopleDbContext.SaveChanges();
 
-            return newPerson;
+            return person;
         }
 
 
-        public List<Person> Read()
+        public List<Person> GetAll()
         {
-            //return _peopleDbContext.People.ToList();
-            List<Person> pList = _peopleDbContext.People.ToList();
+            return _peopleDbContext.People.Include(person=> person.City).ThenInclude(person=> person.Country).Include(person => person.PersonLanguages).ToList();
 
-            return pList;
         }
 
-        public Person Read(int id)
+        public Person GetById(int id)
         {
-            return _peopleDbContext.People.Find(id);
+            return _peopleDbContext.People.Include(person => person.City).ThenInclude(person => person.Country).Include(person => person.PersonLanguages).SingleOrDefault(person => person.PersonId == id);
         }
+        
+           
+        
 
         public bool Update(Person person)
         {
 
             _peopleDbContext.People.Update(person);
            int result= _peopleDbContext.SaveChanges();
-            if (result >0)
+            if (result > 0)
             {
                 return true;
 

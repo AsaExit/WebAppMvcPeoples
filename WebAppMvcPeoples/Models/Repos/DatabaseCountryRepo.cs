@@ -8,33 +8,33 @@ namespace WebAppMvcPeoples.Models.Repos
 {
     public class DatabaseCountryRepo : ICountryRepo
     {
-        readonly PeopleDbContext _countryListContext;
-        public DatabaseCountryRepo(PeopleDbContext countryListContext)
+        readonly PeopleDbContext _peopleDbContext;
+        public DatabaseCountryRepo(PeopleDbContext peopleDbContext)
         {
-            _countryListContext = countryListContext;
+            _peopleDbContext = peopleDbContext;
         }
-        public Country Create(string countryname)
+        public Country Create(Country country)
         {
-            Country newCountry = new Country(countryname);
-            _countryListContext.Add(newCountry);
-            _countryListContext.SaveChanges();
-            return newCountry;
+
+            _peopleDbContext.Countries.Add(country);
+            _peopleDbContext.SaveChanges();
+            return country;
         }
 
-        public List<Country> Read()
+        public List<Country> GetAll()
         {
-            List<Country> countryList = _countryListContext.Countries.ToList();
+            List<Country> countryList = _peopleDbContext.Countries.ToList();
             return countryList;
         }
 
-        public Country Read(int Id)
+        public Country FindById(int id)
         {
-            return _countryListContext.Countries.Find(Id);
+            return _peopleDbContext.Countries.Find(id);
         }
         public bool Update(Country country)
         {
-            _countryListContext.Countries.Update(country);
-            int countryUp=_countryListContext.SaveChanges();
+            _peopleDbContext.Countries.Update(country);
+            int countryUp = _peopleDbContext.SaveChanges();
 
             if (countryUp > 0)
             {
@@ -45,8 +45,8 @@ namespace WebAppMvcPeoples.Models.Repos
 
         public bool Delete(Country country)
         {
-            _countryListContext.Countries.Remove(country);
-            int countryDel = _countryListContext.SaveChanges();
+            _peopleDbContext.Countries.Remove(country);
+            int countryDel = _peopleDbContext.SaveChanges();
 
             if (countryDel > 0)
             {

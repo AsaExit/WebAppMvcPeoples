@@ -24,7 +24,7 @@ namespace WebAppMvcPeoples.Controllers
         }
         public IActionResult SpaPeopleList()
         {
-            return PartialView("_SpaPeopleList", _peopleService.All());
+            return PartialView("_SpaPeopleList", _peopleService.GetAll());
         }
         
         public IActionResult SpaPersonDetails(int id)
@@ -55,7 +55,7 @@ namespace WebAppMvcPeoples.Controllers
             Person person = _peopleService.FindById(id);
             if (_peopleService.Remove(id))
             {
-               return PartialView("_SpaPeopleList", _peopleService.All());
+               return PartialView("_SpaPeopleList", _peopleService.GetAll());
             }
 
             return NotFound();

@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace WebAppMvcPeoples.Models.ViewModels
 {
-    public class PeopleViewModel:CreatePersonViewModel
-    //Chained Constructors
+    public class LanguageViewModel
     {
-        public List<Person> Persons { get; set; }
-
+        public List<Language> LanguageListView { get; set; }
         public string FilterString { get; set; }
-
-
+        public LanguageViewModel() =>LanguageListView = new List<Language>(); 
     }
 }

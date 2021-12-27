@@ -15,46 +15,48 @@ namespace WebAppMvcPeoples.Models.Services
         {
             _countryRepo = countryRepo;
         }
-        public Country Add(CreateCountryViewModel country)
+        public Country Create(CreateCountryViewModel createCountry)
         {
-            Country makeCountry = _countryRepo.Create(country.CountryName);
-            return makeCountry;
-        }
-
-        public CountryViewModel All()
-        {
-            CountryViewModel countryViewMod = new CountryViewModel() 
-            { CountryListView = _countryRepo.Read() };
-            return countryViewMod;
-        }
-
-        public CountryViewModel FindBy(CountryViewModel search)
-        {
-            search.CountryListView.Clear();
-            //
-            foreach (Country item in _countryRepo.Read())
+            if (string.IsNullOrWhiteSpace(createCountry.CountryName))
             {
-                if (item.CountryName.Contains(search.FilterString, StringComparison.OrdinalIgnoreCase))
+                return null;
+            }
+
+            return _countryRepo.Create(new Country(createCountry.CountryName));
+        }
+
+        public List<Country> GetAll()
+        {
+            return _countryRepo.GetAll();
+        }
+
+        public List<Country> FindBy(string search)
+        {
+            List<Country> searchCountry = _countryRepo.GetAll();
+            //
+            foreach (Country item in _countryRepo.GetAll())
+            {
+                if (item.CountryName.Contains(search, StringComparison.OrdinalIgnoreCase))
                 {
-                    search.CountryListView.Add(item);
+                    searchCountry.Add(item);
                 }
             }
             //searchPerson = searchPerson.Where(p => p.Name.ToUpper().Contains(search.ToUpper()) || p.City.Contains(search.ToUpper())).ToList();
-            if (search.CountryListView.Count == 0)
+            if (searchCountry.Count == 0)
             {
                 throw new ArgumentException("Could not find what you where looking for");
             }
-            return search;
+            return searchCountry;
         }
 
-        public Country FindById(int Id)
+        public Country FindById(int id)
         {
-            Country countryFound = _countryRepo.Read(Id);
+            Country countryFound = _countryRepo.FindById(id);
             return countryFound;
         }
-        public bool Edit(int Id, CreateCountryViewModel editCountry)
+        public bool Edit(int id, CreateCountryViewModel editCountry)
         {
-            Country orginalCountry = FindById(Id);
+            Country orginalCountry = FindById(id);
             if (orginalCountry == null)
             {
                 return false;
@@ -63,9 +65,9 @@ namespace WebAppMvcPeoples.Models.Services
             return _countryRepo.Update(orginalCountry);
         }
 
-        public bool Remove(int Id)
+        public bool Remove(int id)
         {
-            Country countryToDelete = _countryRepo.Read(Id);
+            Country countryToDelete = _countryRepo.FindById(id);
             bool succses = _countryRepo.Delete(countryToDelete);
             return succses;
         }

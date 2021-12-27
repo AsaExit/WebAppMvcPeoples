@@ -2,26 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAppMvcPeoples.Models.ViewModels;
 
 namespace WebAppMvcPeoples.Models.Repos
 {// Roles we vill follow CRUD
      public interface IPeopleRepo
     {
         // C Create
-        //Person Create(Person person);
-        public Person Create(string name,string phonenumber, City city); // set this to public later after removing interface:s public
+      
+        Person Create(Person person); //
 
-        // R Read the people list
-        public List<Person> Read();// set this to public later after removing interface:s public
+        // R 
+        List<Person> GetAll();//
 
-        public Person Read(int id);// set this to public later after removing interface:s public
+        Person GetById(int id);// 
 
 
         // U Update the people list
-        public bool Update(Person person);// set this to public later after removing interface:s public
-
+        bool Update(Person person);// 
+      
 
         // D Delete a person from the list
-        public bool Delete(Person person);
+        bool Delete(Person person);
     }//End of Interface
 }//End of namespace

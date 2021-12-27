@@ -7,9 +7,9 @@ namespace WebAppMvcPeoples.Models.Repos
 {
     public interface ICountryRepo
     {
-        Country Create(string countryname);
-        List<Country> Read();
-        Country Read(int Id);
+        Country Create(Country country );
+        List<Country> GetAll();
+        Country FindById(int id);
 
         bool Update(Country country);
         bool Delete(Country country);

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAppMvcPeoples.Models
 {
-    public class PersonLanguage
+    public class PersonLanguage // Join table for to many to many
     {
         public int PersonId { get; set; }
         public Person Person { get; set; }

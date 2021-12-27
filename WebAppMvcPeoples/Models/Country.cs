@@ -7,24 +7,13 @@ using System.Threading.Tasks;
 namespace WebAppMvcPeoples.Models
 {
     public class Country
-    {
-        
-        public List<City> Cities { get; set; }//Navigation Property
-
-        public Country(string countryname)
-        {
-            CountryName = countryname;
-        }
+    { 
         public Country()// Empty constructor
-        {
-
-        }
+        { }
         [Key]
-        public int CountryId { get; }
-        [StringLength(80, MinimumLength = 1)]
-        public string CountryName
-        {
-            get; set;
-        }
+        public int Id { get; set; }// Needs to be set in Cityclass 
+        public string CountryName { get; set; }
+        public Country(string countryName) => CountryName = countryName;
+        public List<City> Cities { get; set; }//Navigation Property
     }
 }
