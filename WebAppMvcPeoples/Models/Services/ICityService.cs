@@ -8,17 +8,17 @@ namespace WebAppMvcPeoples.Models.Services
 {
    public interface ICityService
     {
-        City Add(CreateCityViewModel person);
+        City Create(CreateCityViewModel createCity);
 
-        CityViewModel All();
+        List<City> GetAll();
 
-        CityViewModel FindBy(CityViewModel search);
+        List<City> FindBy(string search);
 
-        City FindById(int Id);
+        City FindById(int id);
 
-        bool Edit(int Id, CreateCityViewModel editCity);
+        bool Edit(int id, CreateCityViewModel cityViewModel);
 
-        bool Remove(int Id);
+        bool Remove(int id);
 
     
 

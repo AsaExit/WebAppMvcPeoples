@@ -10,26 +10,22 @@ namespace WebAppMvcPeoples.Models.Repos
         private static List<Person> peopleList = new List<Person>();
         private static int idCounter = 0;
 
-        public Person Create(string name,string phonenumber,City city)
+        public Person Create(Person person)
         {
-            Person person = new Person(name, phonenumber, city);
-
             person.PersonId = ++idCounter;
-            person.Name = name;
-            person.PhoneNumber = phonenumber;
-            person.City = city;
             peopleList.Add(person);
+
             return person;
         }
 
-        public List<Person> Read()
+        public List<Person> GetAll()
         {
             return peopleList;
         }
 
-        public Person Read(int id)
+        public Person GetById(int id)
         {
-           
+            
             foreach (Person person in peopleList)
             {
                 if (person.PersonId == id)
@@ -43,7 +39,7 @@ namespace WebAppMvcPeoples.Models.Repos
 
         public bool Update(Person person)
         {
-            Person orgPerson = Read(person.PersonId);
+            Person orgPerson = GetById(person.PersonId);
             if (orgPerson == null)
             {
                 return false;

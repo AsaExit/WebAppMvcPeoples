@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAppMvcPeoples.Models;
 using WebAppMvcPeoples.Models.Services;
+using WebAppMvcPeoples.Models.ViewModels;
 
 namespace WebAppMvcPeoples.Controllers
 {
@@ -12,22 +13,24 @@ namespace WebAppMvcPeoples.Controllers
     {
 
         private readonly ICityService _cityService;
-        //private readonly ICountryService _countryService;
-        public CityController(ICityService cityService)
+        private readonly ICountryService _countryService;
+        public CityController(ICityService cityService, ICountryService countryService)
         {
             _cityService = cityService;
+            _countryService = countryService;
         }
-        [HttpGet]
+   
         public IActionResult Index()
         {
-            return View();
+            return View(_cityService.GetAll());
         }
 
         [HttpGet]
-        public IActionResult AllCityList()
+        public IActionResult Create()
         {
-            List<City> cityList = _cityService.All().CityListView;
-            return View();
+            CreateCityViewModel model = new CreateCityViewModel();
+            model.Countries = _countryService.GetAll();
+            return View(model);
         }
         [HttpPost]
         public IActionResult FindCityById(int Id)

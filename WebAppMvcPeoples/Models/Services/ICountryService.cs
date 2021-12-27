@@ -8,17 +8,17 @@ namespace WebAppMvcPeoples.Models.Services
 {
     public interface ICountryService
     {
-        Country Add(CreateCountryViewModel Country);
+        Country Create(CreateCountryViewModel createCountry);
 
-        CountryViewModel All();
+        List<Country> GetAll();
 
-        CountryViewModel FindBy(CountryViewModel search);
+        List<Country> FindBy(string search);
 
-        Country FindById(int Id);
+        Country FindById(int id);
 
-        bool Edit(int Id, CreateCountryViewModel Country);
+        bool Edit(int id, CreateCountryViewModel editCountry);
 
-        bool Remove(int Id);
+        bool Remove(int id);
 
     }
 }

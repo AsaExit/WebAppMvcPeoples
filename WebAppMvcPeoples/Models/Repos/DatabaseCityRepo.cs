@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,34 +9,34 @@ namespace WebAppMvcPeoples.Models.Repos
 {
     public class DatabaseCityRepo : ICityRepo
     {
-        readonly PeopleDbContext _cityListContext;
-        public DatabaseCityRepo(PeopleDbContext cityListContext)
+        readonly PeopleDbContext _peopleDbContext;
+        public DatabaseCityRepo(PeopleDbContext peopleDbContext)
         {
-            _cityListContext = cityListContext;
+            _peopleDbContext = peopleDbContext;
         }
-        public City Create(string cityname)
+        public City Create(City city)
         {
-            City newCity = new City(cityname);
-            _cityListContext.Add(newCity);
-            _cityListContext.SaveChanges();
-            return newCity;
-        }
-
-        public List<City> Read()
-        {
-            List<City> cityList = _cityListContext.Cities.ToList();
-            return cityList;
+            
+            _peopleDbContext.Cities.Add(city);
+            _peopleDbContext.SaveChanges();
+            return city;
         }
 
-        public City Read(int Id)
+        public List<City> GetAll()
         {
-            return _cityListContext.Cities.Find();
+             return _peopleDbContext.Cities.Include(city => city.Country).ToList();
+             
+        }
+
+        public City FindById(int Id)
+        {
+            return _peopleDbContext.Cities.SingleOrDefault(city => city.CityId == Id);
         }
 
         public bool Update(City city)
         {
-            _cityListContext.Cities.Update(city);
-            int resultUp=_cityListContext.SaveChanges();
+            _peopleDbContext.Cities.Update(city);
+            int resultUp= _peopleDbContext.SaveChanges();
             if (resultUp > 0)
             {
                 return true;
@@ -46,8 +47,8 @@ namespace WebAppMvcPeoples.Models.Repos
         }
         public bool Delete(City city)
         {
-            _cityListContext.Cities.Remove(city);
-            int resultDel = _cityListContext.SaveChanges();
+            _peopleDbContext.Cities.Remove(city);
+            int resultDel = _peopleDbContext.SaveChanges();
             if (resultDel > 0)
             {
                 return true;
