@@ -25,7 +25,7 @@ namespace WebAppMvcPeoples.Models.Services
             return _countryRepo.Create(new Country(createCountry.CountryName));
         }
 
-        public List<Country> GetAll()
+        public List<Country> All()
         {
             return _countryRepo.GetAll();
         }

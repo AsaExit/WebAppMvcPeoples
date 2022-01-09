@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppMvcPeoples.Models;
+using WebAppMvcPeoples.Data;
 using WebAppMvcPeoples.Models.Repos;
 
 namespace WebAppMvcPeoples.Data
@@ -26,39 +27,32 @@ namespace WebAppMvcPeoples.Data
 
         public List<Person> GetAll()
         {
-            return _peopleDbContext.People.Include(person=> person.City).ThenInclude(person=> person.Country).Include(person => person.PersonLanguages).ToList();
+            return _peopleDbContext.People.Include(person => person.City).ThenInclude(person => person.Country).Include(person => person.PersonLanguages).ToList();
 
         }
 
         public Person GetById(int id)
         {
-            return _peopleDbContext.People.Include(person => person.City).ThenInclude(person => person.Country).Include(person => person.PersonLanguages).SingleOrDefault(person => person.PersonId == id);
+            return _peopleDbContext.People.Include(person => person.City).ThenInclude(person => person.Country).Include(person => person.PersonLanguages).SingleOrDefault(person => person.Id == id);
         }
-        
-           
-        
 
         public bool Update(Person person)
         {
-
             _peopleDbContext.People.Update(person);
-           int result= _peopleDbContext.SaveChanges();
-            if (result > 0)
+            int result = _peopleDbContext.SaveChanges();
+            if (result == 0)
             {
-                return true;
+                return false;
 
             }
-            return false;
+            return true; 
         }
-        public bool Delete(Person person)
+        public void Delete(Person person)
         {
             _peopleDbContext.People.Remove(person);
-           int result= _peopleDbContext.SaveChanges();
-            if (result > 0)
-            {
-                return true;
-            }
-            return false;
+            _peopleDbContext.SaveChanges();
+         
+            
         }
     }
 }

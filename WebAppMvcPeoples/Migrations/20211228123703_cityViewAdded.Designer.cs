@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppMvcPeoples.Data;
 
 namespace WebAppMvcPeoples.Migrations
 {
     [DbContext(typeof(PeopleDbContext))]
-    partial class PeopleDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211228123703_cityViewAdded")]
+    partial class cityViewAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +22,7 @@ namespace WebAppMvcPeoples.Migrations
 
             modelBuilder.Entity("WebAppMvcPeoples.Models.City", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CityId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -33,7 +35,7 @@ namespace WebAppMvcPeoples.Migrations
                     b.Property<int>("CountryId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("CityId");
 
                     b.HasIndex("CountryId");
 
@@ -57,7 +59,7 @@ namespace WebAppMvcPeoples.Migrations
 
             modelBuilder.Entity("WebAppMvcPeoples.Models.Language", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("LanguageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -65,14 +67,14 @@ namespace WebAppMvcPeoples.Migrations
                     b.Property<string>("LanguageName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("LanguageId");
 
                     b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("WebAppMvcPeoples.Models.Person", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("PersonId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -86,7 +88,7 @@ namespace WebAppMvcPeoples.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PersonId");
 
                     b.HasIndex("CityId");
 

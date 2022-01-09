@@ -13,19 +13,29 @@ namespace WebAppMvcPeoples.Controllers
     public class PeopleController : Controller
     {
         IPeopleService _peopleService;
-        public PeopleController(IPeopleService peopleService)
+        private readonly ICityService _cityService;
+        public PeopleController(IPeopleService peopleService, ICityService cityService)
         {
             _peopleService = peopleService;
+            _cityService = cityService;
         }
+        //public PeopleController()
+        //{
+        //    _peopleService = new PeopleService(new InMemoryPeopleRepo());
+        //}
 
         public IActionResult People()
         {
-            return View(_peopleService.GetAll());
+            return View(_peopleService.All());
         }
         [HttpGet]
+        [AutoValidateAntiforgeryToken]
         public IActionResult Create()
         {
-            return View(new CreatePersonViewModel());
+            CreatePersonViewModel model = new CreatePersonViewModel();
+            model.Cities = _cityService.GetAll();
+            return View(model);
+
         }
         [HttpPost]
         public IActionResult Create(CreatePersonViewModel createPerson)
@@ -34,14 +44,14 @@ namespace WebAppMvcPeoples.Controllers
             {
                 try
                 {
-                    _peopleService.Create(createPerson);
+                    _peopleService.Add(createPerson);
                 }
                 catch (ArgumentException exception)
                 {
                     ModelState.AddModelError("Name,Phonenumber & City", exception.Message);
                     return View(createPerson);
                 }
-             
+
                 return RedirectToAction(nameof(People));
             }
             return View(createPerson);
@@ -59,7 +69,46 @@ namespace WebAppMvcPeoples.Controllers
 
             return View(person);
         }
-       
+        [HttpGet]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Edit(int id)
+        {
+            Person person = _peopleService.FindById(id);
+
+            if (person == null)
+            {
+                return RedirectToAction(nameof(People));
+                //return NotFound();//404
+            }
+            CreatePersonViewModel editPerson = new CreatePersonViewModel()
+            {
+                Name = person.Name,
+                PhoneNumber = person.PhoneNumber,
+                CityId = person.Id
+            };
+            editPerson.Cities = _cityService.GetAll();
+            ViewBag.Id = id;
+
+            return View(person);
+        }
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult Edit(int id, CreatePersonViewModel editPerson)
+        {
+
+            if (ModelState.IsValid)
+            {
+                _peopleService.Edit(id, editPerson);
+                return RedirectToAction(nameof(People));
+                //return NotFound();//404
+            }
+
+            editPerson.Cities = _cityService.GetAll();
+            ViewBag.Id = id;
+
+            return View(editPerson);
+        }
+
         public IActionResult Delete(int id)
         {
             Person person = _peopleService.FindById(id);
@@ -72,10 +121,10 @@ namespace WebAppMvcPeoples.Controllers
             else
             {
                 _peopleService.Remove(id);
-                
+
             }
-            
-            return View(); 
+
+            return View();
         }
         [HttpPost]
         public IActionResult People(string search)
@@ -90,7 +139,7 @@ namespace WebAppMvcPeoples.Controllers
         //**********************************// AJAX //*******************************************//
         public IActionResult PartialViewPeople()
         {
-            return PartialView("_PeopleList", _peopleService.GetAll());
+            return PartialView("_PeopleList", _peopleService.All());
         }
         [HttpPost]
         public IActionResult PartialViewDetails(int id)
@@ -105,9 +154,10 @@ namespace WebAppMvcPeoples.Controllers
         public IActionResult AjaxDelete(int id)
         {
             Person person = _peopleService.FindById(id);
-            if (_peopleService.Remove(id))
+            if (person != null)
             {
-                return PartialView("_PeopleList", _peopleService.GetAll());
+                _peopleService.Remove(id);
+                return PartialView("_PeopleList", _peopleService.All());
             }
             return NotFound();
         }

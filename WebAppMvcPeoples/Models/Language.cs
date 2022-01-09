@@ -10,9 +10,9 @@ namespace WebAppMvcPeoples.Models
     {
         public Language()
         {}
-        public Language(string languageName)=> LanguageName = languageName;
+        public Language(string languageName) { LanguageName = languageName; }
         [Key]
-        public int LanguageId { get; set;}
+        public int Id { get; set;}
         public string LanguageName { get; set; }
         public List<PersonLanguage> PersonLanguages { get; set; } //Navigation Property
     }

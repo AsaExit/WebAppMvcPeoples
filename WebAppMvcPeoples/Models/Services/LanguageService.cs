@@ -7,7 +7,7 @@ using WebAppMvcPeoples.Models.ViewModels;
 
 namespace WebAppMvcPeoples.Models.Services
 {
-    public class LanguageService : ILanguageServise
+    public class LanguageService : ILanguageService
     {
         private ILanguageRepo _languageRepo;
         public LanguageService(ILanguageRepo languageRepo)

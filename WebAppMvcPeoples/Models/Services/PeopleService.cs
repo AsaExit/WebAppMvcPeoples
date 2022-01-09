@@ -10,19 +10,19 @@ namespace WebAppMvcPeoples.Models.Services
     public class PeopleService : IPeopleService
     {
         IPeopleRepo _peopleRepo;
-
-        //ILanguageRepo _languageRepo;
-        public PeopleService(IPeopleRepo peopleRepo) // _languageRepo = languageRepo
+        private readonly ILanguageRepo _languageRepo;
+        public PeopleService(IPeopleRepo peopleRepo, ILanguageRepo languageRepo)
         {
             _peopleRepo = peopleRepo;
-
-           // _languageRepo = languageRepo;
+            _languageRepo = languageRepo;
         }
-        public Person Create(CreatePersonViewModel createPerson)
+        public Person Add(CreatePersonViewModel createPerson)
         {
+
             if (string.IsNullOrWhiteSpace(createPerson.Name))
+
             {
-                throw new ArgumentException("Name may not consist of backspace(s)/whitespace(s)");
+                throw new ArgumentException("Name,Phonenuber or City, not be consist of backspace(s)/whitespace(s)");
             }
             Person person = new Person()
             {
@@ -30,12 +30,10 @@ namespace WebAppMvcPeoples.Models.Services
                 PhoneNumber = createPerson.PhoneNumber,
                 CityId = createPerson.CityId
             };
-
-            person = _peopleRepo.Create(person);
-
+            _peopleRepo.Create(person);
             return person;
         }
-        public List<Person> GetAll()
+        public List<Person> All()
         {
             return _peopleRepo.GetAll();
         }
@@ -60,44 +58,49 @@ namespace WebAppMvcPeoples.Models.Services
         }
         public Person FindById(int id)
         {
-            return _peopleRepo.GetById(id);
+            //return _peopleRepo.Read(id);
+            Person foundPerson = _peopleRepo.GetById(id);
 
+            return foundPerson;
         }
         public bool Edit(int id, CreatePersonViewModel editPerson)
         {
-            Person person = FindById(id);
-            if (person == null)
-            {
-                return false;
-            }
-            person.Name = editPerson.Name;
-            person.PhoneNumber = editPerson.PhoneNumber;
-            person.CityId = editPerson.CityId;
-            return _peopleRepo.Update(person);
+            throw new NotImplementedException();
         }
 
-        public bool Remove(int id)
+        public void Remove(int id)
         {
             Person personToDelete = _peopleRepo.GetById(id);
-            bool success = _peopleRepo.Delete(personToDelete);
-
-            return success;
+            if (personToDelete != null)
+            {
+                _peopleRepo.Delete(personToDelete);
+            }
         }
-
 
         public PersonLanguageViewModel PersonLanguage(Person person)
         {
             throw new NotImplementedException();
         }
 
-        public void removeLanguage(Person person, int languageId)
+        public void RemoveLanguage(Person person, int languageId)
         {
-            throw new NotImplementedException();
+            PersonLanguage language = person.PersonLanguages.SingleOrDefault(persLang => persLang.LanguageId == languageId);
+            person.PersonLanguages.Remove(language);
+            _peopleRepo.Update(person);
         }
 
         public void AddLanguage(Person person, int languageId)
         {
-            throw new NotImplementedException();
+            PersonLanguage language = new PersonLanguage()
+            {
+                LanguageId = languageId,
+                PersonId = person.Id
+            };
+
+            person.PersonLanguages.Add(language);
+
+            _peopleRepo.Update(person);
         }
     }
 }
+

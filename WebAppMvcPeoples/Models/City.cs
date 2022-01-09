@@ -10,20 +10,21 @@ namespace WebAppMvcPeoples.Models
     public class City
     {
         [Key]
-        public int CityId { get; set; }// Key
-        
+        public int Id { get; set; }// Key
+
         public City()//Empty constructor
         { }
 
-        public City(string cityName) => CityName = cityName;
+        public City(string cityName) { CityName = cityName; }
         [Required]
-        [StringLength(80, MinimumLength = 1)]
-        public string CityName { get; set;}
-      
+        [MaxLength(80)]
+        public string CityName { get; set; }
+        public List<Person> People { get; set; }//Navigation Property
+
         [ForeignKey("Country")]
         public int CountryId { get; set; }// PeopleDbContext ForeignKey
         public Country Country { get; set; }//Navigation Property
-        public List<Person> People { get; set; }//Navigation Property
-        
+
+
     }
 }

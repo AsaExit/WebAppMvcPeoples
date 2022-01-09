@@ -28,20 +28,20 @@ namespace WebAppMvcPeoples.Models.Repos
              
         }
 
-        public City FindById(int Id)
+        public City FindById(int id)
         {
-            return _peopleDbContext.Cities.SingleOrDefault(city => city.CityId == Id);
+            return _peopleDbContext.Cities.SingleOrDefault(city => city.Id == id);
         }
 
         public bool Update(City city)
         {
             _peopleDbContext.Cities.Update(city);
-            int resultUp= _peopleDbContext.SaveChanges();
-            if (resultUp > 0)
+            int resultUp = _peopleDbContext.SaveChanges();
+            if (resultUp == 0)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
             
 
         }
@@ -49,11 +49,11 @@ namespace WebAppMvcPeoples.Models.Repos
         {
             _peopleDbContext.Cities.Remove(city);
             int resultDel = _peopleDbContext.SaveChanges();
-            if (resultDel > 0)
+            if (resultDel == 0)
             {
-                return true;
+                return false;
             }
-            return false;
+            return true;
         }
     }
 }
