@@ -7,12 +7,13 @@ using System.ComponentModel.DataAnnotations;
 namespace WebAppMvcPeoples.Models.ViewModels
 {
     public class PeopleViewModel:CreatePersonViewModel
-    //Chained Constructors
     {
-        public List<Person> Persons { get; set; }
+        public List<Person> PeopleListView { get; set; }
 
         public string FilterString { get; set; }
 
+        public PeopleViewModel()
+        { PeopleListView = new List<Person>(); }
 
     }
 }

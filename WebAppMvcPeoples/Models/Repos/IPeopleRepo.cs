@@ -23,6 +23,6 @@ namespace WebAppMvcPeoples.Models.Repos
       
 
         // D Delete a person from the list
-        bool Delete(Person person);
+        void Delete(Person person);
     }//End of Interface
 }//End of namespace

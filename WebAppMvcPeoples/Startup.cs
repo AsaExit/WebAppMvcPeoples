@@ -41,7 +41,7 @@ namespace WebAppMvcPeoples
             services.AddScoped<ICountryService, CountryService>();// IoC & DI
 
             services.AddScoped<ILanguageRepo, DatabaseLanguageRepo>();// IoC & DI
-            services.AddScoped<ILanguageServise, LanguageService>();// IoC & DI
+            services.AddScoped<ILanguageService, LanguageService>();// IoC & DI
 
             //services.AddControllersWithViews(); //Will be used later maybe
             services.AddMvc().AddRazorRuntimeCompilation();

@@ -10,16 +10,19 @@ namespace WebAppMvcPeoples.Models
 
     public class Person
     {
-        public Person()
-        {}
         [Key]
-        public int PersonId { get; set; }// Key
+        public int Id { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
+        public Person()
+        { }
+        public Person(string name)
+        {
+            Name = name;
+        }
         [ForeignKey(nameof(City))]
-        public int CityId { get; set; }// PeopleDbContext and foreignKey
-        public  City City { get; set; }
-
+        public int CityId { get; set; }
+        public City City { get; set; }
         public List<PersonLanguage> PersonLanguages { get; set; }//Navigation Property
 
     }//End of Person Class

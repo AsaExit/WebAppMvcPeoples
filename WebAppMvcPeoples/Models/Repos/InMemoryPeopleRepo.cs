@@ -12,7 +12,7 @@ namespace WebAppMvcPeoples.Models.Repos
 
         public Person Create(Person person)
         {
-            person.PersonId = ++idCounter;
+            person.Id = ++idCounter;
             peopleList.Add(person);
 
             return person;
@@ -25,21 +25,22 @@ namespace WebAppMvcPeoples.Models.Repos
 
         public Person GetById(int id)
         {
-            
-            foreach (Person person in peopleList)
+            Person person = null;
+            foreach (Person thisPerson in peopleList)
             {
-                if (person.PersonId == id)
+                if (thisPerson.Id == id)
                 {
-                    return  person;
+                    person = thisPerson;
+                    break;
                     
                 }
             }
-            return null;
+            return person;
         }
 
         public bool Update(Person person)
         {
-            Person orgPerson = GetById(person.PersonId);
+            Person orgPerson = GetById(person.Id);
             if (orgPerson == null)
             {
                 return false;
@@ -53,9 +54,9 @@ namespace WebAppMvcPeoples.Models.Repos
                 return true;
             }
         }
-        public bool Delete(Person person)
+        public void Delete(Person person)
         {
-            return peopleList.Remove(person);
+            peopleList.Remove(person);
         }
 
 

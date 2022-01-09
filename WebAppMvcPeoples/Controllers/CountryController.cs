@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAppMvcPeoples.Models;
 using WebAppMvcPeoples.Models.Services;
+using WebAppMvcPeoples.Models.ViewModels;
 
 namespace WebAppMvcPeoples.Controllers
 {
@@ -16,16 +18,72 @@ namespace WebAppMvcPeoples.Controllers
         {
             _countryService = countryService;
         }
-        [HttpGet]
-        public ActionResult Index()
+        public IActionResult Index()
         {
-            return View(_countryService.GetAll());
+            return View(_countryService.All());
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public IActionResult Create()
         {
+
             return View();
+        }
+        [HttpPost]
+        public IActionResult Create(CreateCountryViewModel createCountry)
+        {
+            if (ModelState.IsValid)
+            {
+                _countryService.Create(createCountry);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(createCountry);
+        }
+
+        public IActionResult Details(int Id)
+        {
+            Country country = _countryService.FindById(Id);
+            if (country == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return View(country);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int Id)
+        {
+            Country country = _countryService.FindById(Id);
+            if (country == null)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
+            CreateCountryViewModel createCountry = new CreateCountryViewModel();
+            createCountry.CountryName = country.CountryName;
+            ViewBag.Id = country.Id;
+            return View(createCountry);
+
+        }
+        [HttpPost]
+        public IActionResult Edit(int id, CreateCountryViewModel createCountry)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_countryService.Edit(id, createCountry))
+                {
+                    return RedirectToAction(nameof(Index));
+                }
+                //ModelState.AddModelError("Unable to save or save your changes");
+            }
+            ViewBag.Id = id;
+            return View(createCountry);
+
+        }
+        public IActionResult Delete(int id)
+        {
+            _countryService.Remove(id);
+            return RedirectToAction(nameof(Index));
         }
 
 

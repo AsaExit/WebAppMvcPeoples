@@ -22,7 +22,12 @@ namespace WebAppMvcPeoples.Models.Services
                 return null;
             }
 
-            return _cityRepo.Create(new City(createCity.CityName));
+            City city = new City()
+            {
+                CityName = createCity.CityName,
+                CountryId = createCity.CountryId
+            };
+            return _cityRepo.Create(city);
         }
 
 

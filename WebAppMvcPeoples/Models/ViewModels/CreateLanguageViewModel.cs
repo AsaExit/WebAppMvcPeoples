@@ -8,8 +8,8 @@ namespace WebAppMvcPeoples.Models.ViewModels
 {
     public class CreateLanguageViewModel
     {
-        [DataType(DataType.Text)]
-        [Required(ErrorMessage = "Enter a language, it is Required!")]
+        
+        [Required]
         [StringLength(80, MinimumLength = 1)]
         [Display(Name = "Language name")]
         public string LanguageName { get; set; }

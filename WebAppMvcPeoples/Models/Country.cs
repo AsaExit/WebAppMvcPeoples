@@ -8,12 +8,14 @@ namespace WebAppMvcPeoples.Models
 {
     public class Country
     { 
-        public Country()// Empty constructor
-        { }
+
         [Key]
         public int Id { get; set; }// Needs to be set in Cityclass 
-        public string CountryName { get; set; }
-        public Country(string countryName) => CountryName = countryName;
         public List<City> Cities { get; set; }//Navigation Property
+        public string CountryName { get; set; }
+        public Country(string countryName) { CountryName = countryName; }
+        public Country()// Empty constructor
+        { }
+
     }
 }

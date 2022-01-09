@@ -6,7 +6,7 @@ using WebAppMvcPeoples.Models.ViewModels;
 
 namespace WebAppMvcPeoples.Models.Services
 {
-    public interface ILanguageServise
+    public interface ILanguageService
     {
         Language Create(CreateLanguageViewModel createLanguage);
         List<Language> GetAll();

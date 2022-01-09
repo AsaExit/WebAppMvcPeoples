@@ -8,17 +8,17 @@ namespace WebAppMvcPeoples.Models.Services
 {
     public interface IPeopleService
     {
-        Person Create(CreatePersonViewModel createPerson);
-        List<Person> GetAll();
+        Person Add(CreatePersonViewModel createPerson);
+        List<Person> All();
         List<Person> Search(string Search);
         Person FindById(int id);
         //Person Edit(Person person);
         bool Edit(int id, CreatePersonViewModel editPerson);
         //bool Remove(Person person);
-        bool Remove(int id);
+        void Remove(int id);
         PersonLanguageViewModel PersonLanguage(Person person);
-        void removeLanguage(Person person,int languageId);
-        void AddLanguage(Person person,int languageId);
+        void RemoveLanguage(Person person, int languageId);
+        void AddLanguage(Person person, int languageId);
 
 
     }// End of interface

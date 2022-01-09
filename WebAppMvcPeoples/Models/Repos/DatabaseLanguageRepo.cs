@@ -9,35 +9,54 @@ namespace WebAppMvcPeoples.Models.Repos
 {
     public class DatabaseLanguageRepo : ILanguageRepo
     {
-        readonly PeopleDbContext _peopleDbContext;
+        private PeopleDbContext _peopleDbContext;
         public DatabaseLanguageRepo(PeopleDbContext peopleDbContext)
         {
             _peopleDbContext = peopleDbContext;
         }
-        public Language Create(Language createLanguage)
+
+        public Language Create(Language language)
         {
-            throw new NotImplementedException();
+            _peopleDbContext.Languages.Add(language);
+            if (_peopleDbContext.SaveChanges() > 0)
+            {
+                return language;
+            }
+            return null;
         }
 
 
         public List<Language> GetAll()
         {
-            throw new NotImplementedException();
+            return _peopleDbContext.Languages.ToList();
         }
 
         public Language FindById(int id)
         {
-            throw new NotImplementedException();
+            return _peopleDbContext.Languages
+                    .SingleOrDefault(language => language.Id == id);
         }
 
         public bool Update(Language language)
         {
-            throw new NotImplementedException();
+            _peopleDbContext.Languages.Update(language);
+            if (_peopleDbContext.SaveChanges() == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public bool Delete(Language language)
         {
-            throw new NotImplementedException();
+            _peopleDbContext.Languages.Remove(language);
+            if (_peopleDbContext.SaveChanges() == 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

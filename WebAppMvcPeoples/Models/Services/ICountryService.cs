@@ -10,7 +10,7 @@ namespace WebAppMvcPeoples.Models.Services
     {
         Country Create(CreateCountryViewModel createCountry);
 
-        List<Country> GetAll();
+        List<Country> All();
 
         List<Country> FindBy(string search);
 

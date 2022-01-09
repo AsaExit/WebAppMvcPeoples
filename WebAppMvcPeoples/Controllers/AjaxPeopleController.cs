@@ -11,12 +11,12 @@ namespace WebAppMvcPeoples.Controllers
 {
     public class AjaxPeopleController : Controller
     {
-        private readonly IPeopleService _peopleService;
-        //private readonly ICityService _cityService;
+        IPeopleService _peopleService;
+     
         //private readonly ICountryService _countryService;
-        public AjaxPeopleController()
+        public AjaxPeopleController(IPeopleService peopleService)
         {
-            _peopleService = new PeopleService(new InMemoryPeopleRepo());
+            _peopleService = peopleService;
         }
         public IActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace WebAppMvcPeoples.Controllers
         }
         public IActionResult SpaPeopleList()
         {
-            return PartialView("_SpaPeopleList", _peopleService.GetAll());
+            return PartialView("_SpaPeopleList", _peopleService.All());
         }
         
         public IActionResult SpaPersonDetails(int id)
@@ -53,11 +53,11 @@ namespace WebAppMvcPeoples.Controllers
             public IActionResult SpaAjaxDelete(int id)
         {
             Person person = _peopleService.FindById(id);
-            if (_peopleService.Remove(id))
+            if (person !=null)
             {
-               return PartialView("_SpaPeopleList", _peopleService.GetAll());
+                _peopleService.Remove(id);
+                return PartialView("_SpaPeopleList", _peopleService.All());
             }
-
             return NotFound();
         }
     }
