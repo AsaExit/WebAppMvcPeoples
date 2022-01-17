@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace WebAppMvcPeoples.Models.ViewModels
 {
-    public class PeopleViewModel:CreatePersonViewModel
+    public class PeopleViewModel
     {
         public List<Person> PeopleListView { get; set; }
 

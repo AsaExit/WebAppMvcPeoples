@@ -3,38 +3,35 @@
 <h1>Welcome to reg</h1>
 <a asp-action="Create">Add person</a>
 
-<div class="row font-weight-bold mt-3">
 
-    <div class="col-4">Name</div>
-    <div class="col-4">Phonenumber</div>
-    <div class="col-2">City</div>
-    <div class="col-2"></div>
-
-</div>
 
 @foreach (Person person in Model)
 {
-    @*<tr>
-            <td>@person.Name</td>
-            <td>@person.PhoneNumber</td>
-            <td>@person.City</td>
-            <td>@Html.ActionLink("Details", "Details", "People", new { id = person.PersonId })</td>
-            <td></td>
 
-        <td>
-            <button name="X-HTTP-Method-Override" value="DELETE" formnovalidate
-                    class="cancel" onclick="return confirm('Are you sure?')">
-                Delete
-            </button>
-        </td>
+<div class="card mt-5 mb-4 mx-auto" >
+    <div class="card-header bg-white text-dark">
+        <table class=" font-weight-bold mt-3 align-items-lg-stretch" >
+          <thead>
+              <tr>
+                  <th class="col-auto"> Name</th>
+                
+                  <th class="col-auto"> Country</th>
+                 
+                  <th class="col-auto"> City</th>
+                  <th class="col-auto"> *</th>
+              </tr>
+          </thead>
+        </table>
+       
+    </div>
+    <div className="card-body">
+
+        <p class="card-text mt-3"><partial name="_PeopleDisplay" model="person" /></p>
+     
+    </div>
+</div>
+     }
 
 
-        </tr>*@
 
-    <partial name="_PeopleDisplay" model="person" />
-
-}
-
-
-
-
+       

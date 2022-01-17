@@ -9,8 +9,7 @@
 @foreach (Person person in Model)
 {
     <div class="row">
-        <div class="col-4">@person.Name</div>
-        <div class="col-4">@person.City</div>
-        <div class="col-4">@person.Id</div>
+        <partial name="_PeopleDisplay" model="person" />
     </div>
 }
+
