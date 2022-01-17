@@ -1,13 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppMvcPeoples.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebAppMvcPeoples.Data
 {
-    public class PeopleDbContext:DbContext
+    public class PeopleDbContext:IdentityDbContext<IdentityUser>
     {
         public PeopleDbContext(DbContextOptions<PeopleDbContext> options) : base(options)
         { }

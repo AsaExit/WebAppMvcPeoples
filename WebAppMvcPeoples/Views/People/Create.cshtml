@@ -25,9 +25,9 @@
                 <label asp-for="CityId" class="control-label"></label>
                 <select asp-for="CityId" class="form-control">
 
-                    @foreach (City City in Model.Cities)
+                    @foreach (City city in Model.Cities)
                     {
-                        <option value="@City.Id">@City.CityName</option>
+                        <option value="@city.Id">@city.CityName</option>
                     }
 
                 </select>
@@ -40,6 +40,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="People">Back to List</a>
 </div>
 

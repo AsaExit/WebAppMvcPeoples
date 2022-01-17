@@ -65,7 +65,14 @@ namespace WebAppMvcPeoples.Models.Services
         }
         public bool Edit(int id, CreatePersonViewModel editPerson)
         {
-            throw new NotImplementedException();
+            Person person = _peopleRepo.GetById(id);
+            if (person != null)
+            {
+                person.Name = editPerson.Name;
+                person.CityId = editPerson.CityId;
+                person.PhoneNumber = editPerson.PhoneNumber;
+            }
+            return _peopleRepo.Update(person);
         }
 
         public void Remove(int id)
@@ -79,12 +86,28 @@ namespace WebAppMvcPeoples.Models.Services
 
         public PersonLanguageViewModel PersonLanguage(Person person)
         {
-            throw new NotImplementedException();
+            
+                PersonLanguageViewModel personLanguage = new PersonLanguageViewModel();
+                personLanguage.Person = person;
+                List<Language> allLanguages = _languageRepo.GetAll();
+
+                foreach (PersonLanguage pLanguage in person.PersonLanguages)
+                {
+                    Language language = allLanguages.Single(l => l.Id == pLanguage.LanguageId);
+                // l= is a short version for "language"
+                    personLanguage.SpeakesLanguage.Add(language);
+                    allLanguages.Remove(language);
+                }
+                personLanguage.AllLanguages = allLanguages;
+                return personLanguage;
+
+            
         }
 
         public void RemoveLanguage(Person person, int languageId)
         {
-            PersonLanguage language = person.PersonLanguages.SingleOrDefault(persLang => persLang.LanguageId == languageId);
+            PersonLanguage language = person.PersonLanguages.SingleOrDefault(pL => pL.LanguageId == languageId);
+            // pL= is short version for peoleLanguage
             person.PersonLanguages.Remove(language);
             _peopleRepo.Update(person);
         }

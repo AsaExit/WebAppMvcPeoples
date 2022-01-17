@@ -20,7 +20,7 @@ namespace WebAppMvcPeoples.Models.Services
             {
                 throw new ArgumentException("Language Name may not consist of backspace(s)/whitespace(s)");
             }
-            Language language = new Language() { LanguageName = createLanguage.LanguageName, };
+            Language language = new Language() { LanguageName = createLanguage.LanguageName };
             _languageRepo.Create(language);
             return language;
         }

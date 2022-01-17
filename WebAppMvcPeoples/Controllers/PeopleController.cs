@@ -89,7 +89,7 @@ namespace WebAppMvcPeoples.Controllers
             editPerson.Cities = _cityService.GetAll();
             ViewBag.Id = id;
 
-            return View(person);
+            return View(editPerson);
         }
         [HttpPost]
         [AutoValidateAntiforgeryToken]
@@ -134,6 +134,37 @@ namespace WebAppMvcPeoples.Controllers
                 return View(_peopleService.Search(search));
             }
             return RedirectToAction(nameof(People));
+        }
+        public IActionResult PersonLanguage(int id)
+        {
+            Person person = _peopleService.FindById(id);
+            if (person == null)
+            {
+                return RedirectToAction(nameof(People));
+            }
+            return View(_peopleService.PersonLanguage(person));
+        }
+
+        public IActionResult AddLanguage(int personId, int languageId)
+        {
+            Person person = _peopleService.FindById(personId);
+            if (person == null)
+            {
+                return RedirectToAction(nameof(People));
+            }
+            _peopleService.AddLanguage(person, languageId);
+            return RedirectToAction(nameof(PersonLanguage), new { id = person.Id });
+        }
+
+        public IActionResult RemoveLanguage(int personId, int languageId)
+        {
+            Person person = _peopleService.FindById(personId);
+            if (person == null)
+            {
+                return RedirectToAction(nameof(People));
+            }
+            _peopleService.RemoveLanguage(person, languageId);
+            return RedirectToAction(nameof(PersonLanguage), new { id = person.Id });
         }
 
         //**********************************// AJAX //*******************************************//

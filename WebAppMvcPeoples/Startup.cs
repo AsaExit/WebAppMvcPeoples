@@ -6,12 +6,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppMvcPeoples.Data;
 using WebAppMvcPeoples.Models.Repos;
 using WebAppMvcPeoples.Models.Services;
+using WebAppMvcPeoples.Models;
 
 namespace WebAppMvcPeoples
 {
@@ -29,6 +31,19 @@ namespace WebAppMvcPeoples
         {// Step 5
             services.AddDbContext<PeopleDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<PeopleDbContext>().AddDefaultTokenProviders();
+            //services.Configure<IdentityOptions>(options =>
+            //{
+            //    options.Password.RequireDigit = true;
+            //    options.Password.RequireLowercase = true;
+            //    options.Password.RequireNonAlphanumeric = true;
+            //    options.Password.RequireUppercase = true;
+            //    options.Password.RequiredLength = 6;
+            //    options.Password.RequiredUniqueChars = 1;
+
+            //});
+            
             // Step 6
             //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();
             services.AddScoped<IPeopleRepo, DatabasPeopleRepo>();// IoC & DI
@@ -65,6 +80,7 @@ namespace WebAppMvcPeoples
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
