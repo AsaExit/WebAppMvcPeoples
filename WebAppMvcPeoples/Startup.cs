@@ -32,18 +32,18 @@ namespace WebAppMvcPeoples
             services.AddDbContext<PeopleDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<PeopleDbContext>().AddDefaultTokenProviders();
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    options.Password.RequireDigit = true;
-            //    options.Password.RequireLowercase = true;
-            //    options.Password.RequireNonAlphanumeric = true;
-            //    options.Password.RequireUppercase = true;
-            //    options.Password.RequiredLength = 6;
-            //    options.Password.RequiredUniqueChars = 1;
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<PeopleDbContext>().AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 2;
 
-            //});
-            
+            });
+
             // Step 6
             //services.AddScoped<IPeopleRepo, InMemoryPeopleRepo>();
             services.AddScoped<IPeopleRepo, DatabasPeopleRepo>();// IoC & DI
