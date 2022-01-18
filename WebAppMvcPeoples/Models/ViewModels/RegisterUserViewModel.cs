@@ -42,7 +42,7 @@ namespace WebAppMvcPeoples.Models.ViewModels
 
         [Required]
         [EmailAddress]
-        public string Enail { get; set; }
+        public string Email { get; set; }
 
     }
 }
