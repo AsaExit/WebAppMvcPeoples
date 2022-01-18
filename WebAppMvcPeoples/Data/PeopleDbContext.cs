@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace WebAppMvcPeoples.Data
 {
-    public class PeopleDbContext:IdentityDbContext<IdentityUser>
+    public class PeopleDbContext:IdentityDbContext<AppUser>
     {
         public PeopleDbContext(DbContextOptions<PeopleDbContext> options) : base(options)
         { }
