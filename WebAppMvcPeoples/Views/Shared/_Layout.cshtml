@@ -18,27 +18,39 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="People" asp-action="People">People</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="AjaxPeople" asp-action="Index">Ajax</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="City" asp-action="Index">Cities</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Country" asp-action="Index">Countries</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Language" asp-action="Index">Language</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="People" asp-action="People">People</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @*<li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="People" asp-action="People">People</a>
+                            </li>*@
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="AjaxPeople" asp-action="Index">Ajax</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="City" asp-action="Index">Cities</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Country" asp-action="Index">Countries</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Language" asp-action="Index">Language</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="Index">Roles</a>
+                            </li>
+                        }
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
