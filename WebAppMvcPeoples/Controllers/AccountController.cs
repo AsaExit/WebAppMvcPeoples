@@ -88,6 +88,9 @@ namespace WebAppMvcPeoples.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("index", "Home");
         }
-
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }
