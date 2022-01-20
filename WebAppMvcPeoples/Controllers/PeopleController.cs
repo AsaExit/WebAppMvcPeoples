@@ -26,7 +26,7 @@ namespace WebAppMvcPeoples.Controllers
 
         public IActionResult People()
         {
-            return View(_peopleService.All());
+            return View(_peopleService.GetAll());
         }
         [HttpGet]
         [AutoValidateAntiforgeryToken]
@@ -44,7 +44,7 @@ namespace WebAppMvcPeoples.Controllers
             {
                 try
                 {
-                    _peopleService.Add(createPerson);
+                    _peopleService.Create(createPerson);
                 }
                 catch (ArgumentException exception)
                 {
@@ -170,7 +170,7 @@ namespace WebAppMvcPeoples.Controllers
         //**********************************// AJAX //*******************************************//
         public IActionResult PartialViewPeople()
         {
-            return PartialView("_PeopleList", _peopleService.All());
+            return PartialView("_PeopleList", _peopleService.GetAll());
         }
         [HttpPost]
         public IActionResult PartialViewDetails(int id)
@@ -188,7 +188,7 @@ namespace WebAppMvcPeoples.Controllers
             if (person != null)
             {
                 _peopleService.Remove(id);
-                return PartialView("_PeopleList", _peopleService.All());
+                return PartialView("_PeopleList", _peopleService.GetAll());
             }
             return NotFound();
         }
