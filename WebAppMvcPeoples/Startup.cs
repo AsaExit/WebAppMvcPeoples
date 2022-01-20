@@ -14,6 +14,7 @@ using WebAppMvcPeoples.Data;
 using WebAppMvcPeoples.Models.Repos;
 using WebAppMvcPeoples.Models.Services;
 using WebAppMvcPeoples.Models;
+using Microsoft.OpenApi.Models;
 
 namespace WebAppMvcPeoples
 {
@@ -59,6 +60,25 @@ namespace WebAppMvcPeoples
             services.AddScoped<ILanguageService, LanguageService>();// IoC & DI
 
             //services.AddControllersWithViews(); //Will be used later maybe
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "People API",
+                    Version = "v1"
+                });
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MyAllowSpecificOrigins",
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("*");// replace "*" with the domain or adress from were you will make request from "http://www.my-domain.com"
+                                   });
+            });
+
             services.AddMvc().AddRazorRuntimeCompilation();
         }
 
@@ -82,6 +102,9 @@ namespace WebAppMvcPeoples
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(option => { option.SwaggerEndpoint("/swagger/v1/swagger.json", "People API"); });
 
             app.UseEndpoints(endpoints =>
             {

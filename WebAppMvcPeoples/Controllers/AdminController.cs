@@ -11,7 +11,7 @@ using System.Text;
 
 namespace WebAppMvcPeoples.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles ="Admin , SuperAdmin")]
     public class AdminController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;

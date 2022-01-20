@@ -16,7 +16,7 @@ namespace WebAppMvcPeoples.Models.Services
             _peopleRepo = peopleRepo;
             _languageRepo = languageRepo;
         }
-        public Person Add(CreatePersonViewModel createPerson)
+        public Person Create(CreatePersonViewModel createPerson)
         {
 
             if (string.IsNullOrWhiteSpace(createPerson.Name))
@@ -33,7 +33,7 @@ namespace WebAppMvcPeoples.Models.Services
             _peopleRepo.Create(person);
             return person;
         }
-        public List<Person> All()
+        public List<Person> GetAll()
         {
             return _peopleRepo.GetAll();
         }
